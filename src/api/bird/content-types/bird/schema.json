@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "birds",
+  "info": {
+    "singularName": "bird",
+    "pluralName": "birds",
+    "displayName": "Bird"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}
