@@ -1,0 +1,58 @@
+{
+    "kind": "collectionType",
+    "collectionName": "montures",
+    "info": {
+        "singularName": "monture",
+        "pluralName": "montures",
+        "displayName": "Monture",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "Marque": {
+            "type": "enumeration",
+            "enum": ["Chanel", "Ray-Ban", "Oakley", "Persol", "Gucci"],
+            "required": true
+        },
+        "Modele": {
+            "type": "string",
+            "required": true,
+            "unique": true
+        },
+        "Type": {
+            "type": "enumeration",
+            "enum": ["Invisible", "Cerclee", "Semi-cerclee"]
+        },
+        "Forme": {
+            "type": "enumeration",
+            "enum": ["Aviateur", "Rectangulaire", "Ronde", "Papillon"]
+        },
+        "Materiau": {
+            "type": "enumeration",
+            "enum": ["Metal", "Titane", "Plastique"]
+        },
+        "Couleur": {
+            "type": "enumeration",
+            "enum": ["Bleu", "Argent", "Dore", "Rouge", "Transparent", "Noir"]
+        },
+        "Taille": {
+            "type": "string"
+        },
+        "Prix": {
+            "type": "decimal"
+        },
+        "Style": {
+            "type": "enumeration",
+            "enum": ["Luxe", "Business", "Casual", "Sport"]
+        },
+        "Stock": {
+            "type": "integer"
+        },
+        "Monture_ID": {
+            "type": "string"
+        }
+    }
+}

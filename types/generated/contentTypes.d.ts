@@ -1,17 +1,41 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiBirdBird extends Struct.CollectionTypeSchema {
-  collectionName: 'birds';
+export interface ApiMontureMonture extends Struct.CollectionTypeSchema {
+  collectionName: 'montures';
   info: {
-    singularName: 'bird';
-    pluralName: 'birds';
-    displayName: 'Bird';
+    singularName: 'monture';
+    pluralName: 'montures';
+    displayName: 'Monture';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    name: Schema.Attribute.String;
+    Marque: Schema.Attribute.Enumeration<
+      ['Chanel', 'Ray-Ban', 'Oakley', 'Persol', 'Gucci']
+    > &
+      Schema.Attribute.Required;
+    Modele: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    Type: Schema.Attribute.Enumeration<
+      ['Invisible', 'Cerclee', 'Semi-cerclee']
+    >;
+    Forme: Schema.Attribute.Enumeration<
+      ['Aviateur', 'Rectangulaire', 'Ronde', 'Papillon']
+    >;
+    Materiau: Schema.Attribute.Enumeration<['Metal', 'Titane', 'Plastique']>;
+    Couleur: Schema.Attribute.Enumeration<
+      ['Bleu', 'Argent', 'Dore', 'Rouge', 'Transparent', 'Noir']
+    >;
+    Taille: Schema.Attribute.String;
+    Prix: Schema.Attribute.Decimal;
+    Style: Schema.Attribute.Enumeration<
+      ['Luxe', 'Business', 'Casual', 'Sport']
+    >;
+    Stock: Schema.Attribute.Integer;
+    Monture_ID: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -20,7 +44,10 @@ export interface ApiBirdBird extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::bird.bird'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::monture.monture'
+    > &
       Schema.Attribute.Private;
   };
 }
@@ -892,7 +919,7 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
-      'api::bird.bird': ApiBirdBird;
+      'api::monture.monture': ApiMontureMonture;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
