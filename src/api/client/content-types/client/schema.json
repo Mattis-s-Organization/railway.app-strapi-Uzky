@@ -1,83 +1,70 @@
 {
-  "kind": "collectionType",
-  "collectionName": "clients",
-  "info": {
-    "singularName": "client",
-    "pluralName": "clients",
-    "displayName": "Client",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "Nom": {
-      "type": "string"
+    "kind": "collectionType",
+    "collectionName": "clients",
+    "info": {
+        "singularName": "client",
+        "pluralName": "clients",
+        "displayName": "Client",
+        "description": ""
     },
-    "Prenom": {
-      "type": "string"
+    "options": {
+        "draftAndPublish": false
     },
-    "Date_Naissance": {
-      "type": "date"
-    },
-    "Genre": {
-      "type": "enumeration",
-      "enum": [
-        "Homme",
-        "Femme",
-        "Non-binaire"
-      ]
-    },
-    "Ville": {
-      "type": "string"
-    },
-    "Code_Postal": {
-      "type": "string"
-    },
-    "Pays": {
-      "type": "string"
-    },
-    "Adresse": {
-      "type": "string"
-    },
-    "Email": {
-      "type": "string"
-    },
-    "Telephone": {
-      "type": "string"
-    },
-    "Frequence_Achat": {
-      "type": "integer"
-    },
-    "Mode_Paiement_Favori": {
-      "type": "enumeration",
-      "enum": [
-        "Paypal",
-        "CB",
-        "Virement",
-        "Carte cadeau"
-      ]
-    },
-    "Preferences_Communication": {
-      "type": "enumeration",
-      "enum": [
-        "Email",
-        "SMS",
-        "Push"
-      ]
-    },
-    "Retour": {
-      "type": "integer"
-    },
-    "Client_ID": {
-      "type": "string"
-    },
-    "commandes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::commande.commande",
-      "mappedBy": "clients"
+    "pluginOptions": {},
+    "attributes": {
+        "Nom": {
+            "type": "string"
+        },
+        "Prenom": {
+            "type": "string"
+        },
+        "Date_Naissance": {
+            "type": "date"
+        },
+        "Genre": {
+            "type": "enumeration",
+            "enum": ["Homme", "Femme", "Non-binaire"]
+        },
+        "Ville": {
+            "type": "string"
+        },
+        "Code_Postal": {
+            "type": "string"
+        },
+        "Pays": {
+            "type": "string"
+        },
+        "Adresse": {
+            "type": "string"
+        },
+        "Email": {
+            "type": "string"
+        },
+        "Telephone": {
+            "type": "string"
+        },
+        "Frequence_Achat": {
+            "type": "integer"
+        },
+        "Mode_Paiement_Favori": {
+            "type": "enumeration",
+            "enum": ["Paypal", "CB", "Virement", "Carte cadeau"]
+        },
+        "Preferences_Communication": {
+            "type": "enumeration",
+            "enum": ["Email", "SMS", "Push"]
+        },
+        "Retour": {
+            "type": "integer"
+        },
+        "Client_ID": {
+            "type": "string"
+        },
+        "commandes": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::commande.commande",
+            "mappedBy": "clients"
+        }
     }
-  }
 }
