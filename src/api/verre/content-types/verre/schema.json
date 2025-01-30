@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "verres",
+  "info": {
+    "singularName": "verre",
+    "pluralName": "verres",
+    "displayName": "Verre"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Verre_ID": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Progressif",
+        "Unifocal"
+      ]
+    },
+    "Indice_Refraction": {
+      "type": "decimal"
+    },
+    "Traitements": {
+      "type": "enumeration",
+      "enum": [
+        "Anti-rayure",
+        "Hydrophode",
+        "Anti-reflet"
+      ]
+    },
+    "Teinte": {
+      "type": "enumeration",
+      "enum": [
+        "Teintee",
+        "Photochromique",
+        "Polarisee",
+        "Transitions",
+        "Miroir",
+        "Degradee",
+        "Claire"
+      ]
+    },
+    "Compatibilite": {
+      "type": "string"
+    },
+    "Prix": {
+      "type": "decimal"
+    },
+    "Stock": {
+      "type": "integer"
+    },
+    "Categorie_Protection": {
+      "type": "enumeration",
+      "enum": [
+        "Categorie 0",
+        "Categorie 1",
+        "Categorie 2",
+        "Categorie 3",
+        "Categorie 4",
+        "Lunettes de vue"
+      ]
+    },
+    "Securite": {
+      "type": "boolean"
+    },
+    "Solaire": {
+      "type": "boolean"
+    },
+    "commandes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::commande.commande",
+      "mappedBy": "verres"
+    }
+  }
+}

@@ -1,57 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiMontureMonture extends Struct.CollectionTypeSchema {
-  collectionName: 'montures';
-  info: {
-    singularName: 'monture';
-    pluralName: 'montures';
-    displayName: 'Monture';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    Marque: Schema.Attribute.Enumeration<
-      ['Chanel', 'Ray-Ban', 'Oakley', 'Persol', 'Gucci']
-    > &
-      Schema.Attribute.Required;
-    Modele: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    Type: Schema.Attribute.Enumeration<
-      ['Invisible', 'Cerclee', 'Semi-cerclee']
-    >;
-    Forme: Schema.Attribute.Enumeration<
-      ['Aviateur', 'Rectangulaire', 'Ronde', 'Papillon']
-    >;
-    Materiau: Schema.Attribute.Enumeration<['Metal', 'Titane', 'Plastique']>;
-    Couleur: Schema.Attribute.Enumeration<
-      ['Bleu', 'Argent', 'Dore', 'Rouge', 'Transparent', 'Noir']
-    >;
-    Taille: Schema.Attribute.String;
-    Prix: Schema.Attribute.Decimal;
-    Style: Schema.Attribute.Enumeration<
-      ['Luxe', 'Business', 'Casual', 'Sport']
-    >;
-    Stock: Schema.Attribute.Integer;
-    Monture_ID: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::monture.monture'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -547,6 +495,213 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiClientClient extends Struct.CollectionTypeSchema {
+  collectionName: 'clients';
+  info: {
+    singularName: 'client';
+    pluralName: 'clients';
+    displayName: 'Client';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nom: Schema.Attribute.String;
+    Prenom: Schema.Attribute.String;
+    Date_Naissance: Schema.Attribute.Date;
+    Genre: Schema.Attribute.Enumeration<['Homme', 'Femme', 'Non-binaire']>;
+    Ville: Schema.Attribute.String;
+    Code_Postal: Schema.Attribute.String;
+    Pays: Schema.Attribute.String;
+    Adresse: Schema.Attribute.String;
+    Email: Schema.Attribute.String;
+    Telephone: Schema.Attribute.String;
+    Frequence_Achat: Schema.Attribute.Integer;
+    Mode_Paiement_Favori: Schema.Attribute.Enumeration<
+      ['Paypal', 'CB', 'Virement', 'Carte cadeau']
+    >;
+    Preferences_Communication: Schema.Attribute.Enumeration<
+      ['Email', 'SMS', 'Push']
+    >;
+    Retour: Schema.Attribute.Integer;
+    Client_ID: Schema.Attribute.String;
+    commandes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::commande.commande'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::client.client'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCommandeCommande extends Struct.CollectionTypeSchema {
+  collectionName: 'commandes';
+  info: {
+    singularName: 'commande';
+    pluralName: 'commandes';
+    displayName: 'Commande';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    clients: Schema.Attribute.Relation<'manyToMany', 'api::client.client'>;
+    verres: Schema.Attribute.Relation<'manyToMany', 'api::verre.verre'>;
+    montures: Schema.Attribute.Relation<'manyToMany', 'api::monture.monture'>;
+    Date_Commande: Schema.Attribute.Date;
+    Statut: Schema.Attribute.Enumeration<
+      ['Expediee', 'Livree', 'Annulee', 'En cours']
+    >;
+    Methode_Paiement: Schema.Attribute.Enumeration<
+      ['Carte cadeau', 'Virement', 'PayPal', 'CB']
+    >;
+    Canal: Schema.Attribute.Enumeration<['Site web', 'Magasin', 'App mobile']>;
+    Montant_Total: Schema.Attribute.Decimal;
+    Adresse_Livraison: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::commande.commande'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMontureMonture extends Struct.CollectionTypeSchema {
+  collectionName: 'montures';
+  info: {
+    singularName: 'monture';
+    pluralName: 'montures';
+    displayName: 'Monture';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Marque: Schema.Attribute.Enumeration<
+      ['Chanel', 'Ray-Ban', 'Oakley', 'Persol', 'Gucci']
+    > &
+      Schema.Attribute.Required;
+    Modele: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    Type: Schema.Attribute.Enumeration<
+      ['Invisible', 'Cerclee', 'Semi-cerclee']
+    >;
+    Forme: Schema.Attribute.Enumeration<
+      ['Aviateur', 'Rectangulaire', 'Ronde', 'Papillon']
+    >;
+    Materiau: Schema.Attribute.Enumeration<['Metal', 'Titane', 'Plastique']>;
+    Couleur: Schema.Attribute.Enumeration<
+      ['Bleu', 'Argent', 'Dore', 'Rouge', 'Transparent', 'Noir']
+    >;
+    Taille: Schema.Attribute.String;
+    Prix: Schema.Attribute.Decimal;
+    Style: Schema.Attribute.Enumeration<
+      ['Luxe', 'Business', 'Casual', 'Sport']
+    >;
+    Stock: Schema.Attribute.Integer;
+    Monture_ID: Schema.Attribute.String;
+    commandes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::commande.commande'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::monture.monture'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVerreVerre extends Struct.CollectionTypeSchema {
+  collectionName: 'verres';
+  info: {
+    singularName: 'verre';
+    pluralName: 'verres';
+    displayName: 'Verre';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Verre_ID: Schema.Attribute.String;
+    Type: Schema.Attribute.Enumeration<['Progressif', 'Unifocal']>;
+    Indice_Refraction: Schema.Attribute.Decimal;
+    Traitements: Schema.Attribute.Enumeration<
+      ['Anti-rayure', 'Hydrophode', 'Anti-reflet']
+    >;
+    Teinte: Schema.Attribute.Enumeration<
+      [
+        'Teintee',
+        'Photochromique',
+        'Polarisee',
+        'Transitions',
+        'Miroir',
+        'Degradee',
+        'Claire',
+      ]
+    >;
+    Compatibilite: Schema.Attribute.String;
+    Prix: Schema.Attribute.Decimal;
+    Stock: Schema.Attribute.Integer;
+    Categorie_Protection: Schema.Attribute.Enumeration<
+      [
+        'Categorie 0',
+        'Categorie 1',
+        'Categorie 2',
+        'Categorie 3',
+        'Categorie 4',
+        'Lunettes de vue',
+      ]
+    >;
+    Securite: Schema.Attribute.Boolean;
+    Solaire: Schema.Attribute.Boolean;
+    commandes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::commande.commande'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::verre.verre'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -919,7 +1074,6 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
-      'api::monture.monture': ApiMontureMonture;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -930,6 +1084,10 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::client.client': ApiClientClient;
+      'api::commande.commande': ApiCommandeCommande;
+      'api::monture.monture': ApiMontureMonture;
+      'api::verre.verre': ApiVerreVerre;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
