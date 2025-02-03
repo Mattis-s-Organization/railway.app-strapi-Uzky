@@ -643,6 +643,7 @@ export interface ApiPrescriptionPrescription
     singularName: 'prescription';
     pluralName: 'prescriptions';
     displayName: 'Prescription';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -659,6 +660,7 @@ export interface ApiPrescriptionPrescription
     pathologie: Schema.Attribute.String;
     type_verre: Schema.Attribute.String;
     restrictions: Schema.Attribute.String;
+    cylindre_og: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

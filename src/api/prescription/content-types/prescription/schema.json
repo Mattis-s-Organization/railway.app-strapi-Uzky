@@ -4,7 +4,8 @@
   "info": {
     "singularName": "prescription",
     "pluralName": "prescriptions",
-    "displayName": "Prescription"
+    "displayName": "Prescription",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -43,6 +44,9 @@
     },
     "restrictions": {
       "type": "string"
+    },
+    "cylindre_og": {
+      "type": "decimal"
     }
   }
 }
