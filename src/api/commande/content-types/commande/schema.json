@@ -1,54 +1,63 @@
 {
-    "kind": "collectionType",
-    "collectionName": "commandes",
-    "info": {
-        "singularName": "commande",
-        "pluralName": "commandes",
-        "displayName": "Commande"
+  "kind": "collectionType",
+  "collectionName": "commandes",
+  "info": {
+    "singularName": "commande",
+    "pluralName": "commandes",
+    "displayName": "Commande",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Date_Commande": {
+      "type": "date"
     },
-    "options": {
-        "draftAndPublish": false
+    "Statut": {
+      "type": "enumeration",
+      "enum": [
+        "Expediee",
+        "Livree",
+        "Annulee",
+        "En cours"
+      ]
     },
-    "pluginOptions": {},
-    "attributes": {
-        "clients": {
-            "type": "relation",
-            "relation": "manyToMany",
-            "target": "api::client.client",
-            "inversedBy": "commandes"
-        },
-        "verres": {
-            "type": "relation",
-            "relation": "manyToMany",
-            "target": "api::verre.verre",
-            "inversedBy": "commandes"
-        },
-        "montures": {
-            "type": "relation",
-            "relation": "manyToMany",
-            "target": "api::monture.monture",
-            "inversedBy": "commandes"
-        },
-        "Date_Commande": {
-            "type": "date"
-        },
-        "Statut": {
-            "type": "enumeration",
-            "enum": ["Expediee", "Livree", "Annulee", "En cours"]
-        },
-        "Methode_Paiement": {
-            "type": "enumeration",
-            "enum": ["Carte cadeau", "Virement", "PayPal", "CB"]
-        },
-        "Canal": {
-            "type": "enumeration",
-            "enum": ["Site web", "Magasin", "App mobile"]
-        },
-        "Montant_Total": {
-            "type": "decimal"
-        },
-        "Adresse_Livraison": {
-            "type": "string"
-        }
+    "Methode_Paiement": {
+      "type": "enumeration",
+      "enum": [
+        "Carte cadeau",
+        "Virement",
+        "PayPal",
+        "CB"
+      ]
+    },
+    "Canal": {
+      "type": "enumeration",
+      "enum": [
+        "Site web",
+        "Magasin",
+        "App mobile"
+      ]
+    },
+    "Montant_Total": {
+      "type": "decimal"
+    },
+    "Adresse_Livraison": {
+      "type": "string"
+    },
+    "monture_id": {
+      "type": "string"
+    },
+    "client_id": {
+      "type": "string"
+    },
+    "verre_id": {
+      "type": "string"
+    },
+    "commande_id": {
+      "type": "string"
     }
+  }
 }

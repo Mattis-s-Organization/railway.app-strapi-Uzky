@@ -504,7 +504,7 @@ export interface ApiClientClient extends Struct.CollectionTypeSchema {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     Nom: Schema.Attribute.String;
@@ -526,10 +526,6 @@ export interface ApiClientClient extends Struct.CollectionTypeSchema {
     >;
     Retour: Schema.Attribute.Integer;
     Client_ID: Schema.Attribute.String;
-    commandes: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::commande.commande'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -552,14 +548,12 @@ export interface ApiCommandeCommande extends Struct.CollectionTypeSchema {
     singularName: 'commande';
     pluralName: 'commandes';
     displayName: 'Commande';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    clients: Schema.Attribute.Relation<'manyToMany', 'api::client.client'>;
-    verres: Schema.Attribute.Relation<'manyToMany', 'api::verre.verre'>;
-    montures: Schema.Attribute.Relation<'manyToMany', 'api::monture.monture'>;
     Date_Commande: Schema.Attribute.Date;
     Statut: Schema.Attribute.Enumeration<
       ['Expediee', 'Livree', 'Annulee', 'En cours']
@@ -570,6 +564,10 @@ export interface ApiCommandeCommande extends Struct.CollectionTypeSchema {
     Canal: Schema.Attribute.Enumeration<['Site web', 'Magasin', 'App mobile']>;
     Montant_Total: Schema.Attribute.Decimal;
     Adresse_Livraison: Schema.Attribute.String;
+    monture_id: Schema.Attribute.String;
+    client_id: Schema.Attribute.String;
+    verre_id: Schema.Attribute.String;
+    commande_id: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -622,10 +620,6 @@ export interface ApiMontureMonture extends Struct.CollectionTypeSchema {
     >;
     Stock: Schema.Attribute.Integer;
     Monture_ID: Schema.Attribute.String;
-    commandes: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::commande.commande'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -642,6 +636,45 @@ export interface ApiMontureMonture extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPrescriptionPrescription
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'prescriptions';
+  info: {
+    singularName: 'prescription';
+    pluralName: 'prescriptions';
+    displayName: 'Prescription';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    client_id: Schema.Attribute.String;
+    sphere_od: Schema.Attribute.Decimal;
+    sphere_og: Schema.Attribute.Decimal;
+    cylindre_od: Schema.Attribute.Decimal;
+    axe_od: Schema.Attribute.Decimal;
+    axe_og: Schema.Attribute.Decimal;
+    addition: Schema.Attribute.Decimal;
+    PD: Schema.Attribute.Integer;
+    pathologie: Schema.Attribute.String;
+    type_verre: Schema.Attribute.String;
+    restrictions: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::prescription.prescription'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiVerreVerre extends Struct.CollectionTypeSchema {
   collectionName: 'verres';
   info: {
@@ -650,7 +683,7 @@ export interface ApiVerreVerre extends Struct.CollectionTypeSchema {
     displayName: 'Verre';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     Verre_ID: Schema.Attribute.String;
@@ -685,10 +718,6 @@ export interface ApiVerreVerre extends Struct.CollectionTypeSchema {
     >;
     Securite: Schema.Attribute.Boolean;
     Solaire: Schema.Attribute.Boolean;
-    commandes: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::commande.commande'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1087,6 +1116,7 @@ declare module '@strapi/strapi' {
       'api::client.client': ApiClientClient;
       'api::commande.commande': ApiCommandeCommande;
       'api::monture.monture': ApiMontureMonture;
+      'api::prescription.prescription': ApiPrescriptionPrescription;
       'api::verre.verre': ApiVerreVerre;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

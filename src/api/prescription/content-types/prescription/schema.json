@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prescriptions",
+  "info": {
+    "singularName": "prescription",
+    "pluralName": "prescriptions",
+    "displayName": "Prescription"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "client_id": {
+      "type": "string"
+    },
+    "sphere_od": {
+      "type": "decimal"
+    },
+    "sphere_og": {
+      "type": "decimal"
+    },
+    "cylindre_od": {
+      "type": "decimal"
+    },
+    "axe_od": {
+      "type": "decimal"
+    },
+    "axe_og": {
+      "type": "decimal"
+    },
+    "addition": {
+      "type": "decimal"
+    },
+    "PD": {
+      "type": "integer"
+    },
+    "pathologie": {
+      "type": "string"
+    },
+    "type_verre": {
+      "type": "string"
+    },
+    "restrictions": {
+      "type": "string"
+    }
+  }
+}

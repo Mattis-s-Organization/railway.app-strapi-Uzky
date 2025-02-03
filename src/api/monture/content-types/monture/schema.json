@@ -84,12 +84,6 @@
     },
     "Monture_ID": {
       "type": "string"
-    },
-    "commandes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::commande.commande",
-      "mappedBy": "montures"
     }
   }
 }
